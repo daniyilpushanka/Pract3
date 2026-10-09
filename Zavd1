@@ -1,0 +1,103 @@
+cars = {
+    "BMW": [150, 35000],
+    "Audi": [120, 30000],
+    "Toyota": [95, 25000],
+    "Mercedes": [180, 45000],
+    "Ford": [110, 28000],
+    "Volkswagen": [100, 27000],
+    "Honda": [130, 29000],
+    "Skoda": [90, 22000],
+    "Lexus": [200, 50000],
+    "Nissan": [105, 26000]
+}
+
+def output(cars):
+    for name in cars:
+        print("Автомобіль:", name)
+        print("Потужність:", cars[name][0], "к.с.")
+        print("Вартість:", cars[name][1], "$")
+        print()
+
+def add(cars, name, power, price):
+    cars[name] = [power, price]
+    print("Додано", name)
+
+def delete(cars, name):
+    try:
+        del cars[name]
+        print("Видалено", name)
+    except KeyError:
+        print("Такого автомобіля немає.")
+
+def sort(cars):
+    cars = {k: cars[k] for k in sorted(cars)}
+
+    print("Відсортований словник:")
+
+    for name in cars:
+        print("Автомобіль:", name)
+        print("Потужність:", cars[name][0], "к.с.")
+        print("Вартість:", cars[name][1], "$")
+        print()
+
+def calculate(cars):
+    total = 0
+
+    for name in cars:
+        if cars[name][0] > 100:
+            total = total + cars[name][1]
+
+    print("Загальна вартість автомобілів")
+    print("з потужністю понад 100 к.с.:", total, "$")
+
+while True:
+
+    print()
+    print("1 - Вивести всі автомобілі")
+    print("2 - Додати автомобіль")
+    print("3 - Видалити автомобіль")
+    print("4 - Відсортувати список")
+    print("5 - Знайти загальну вартість автомобілів")
+    print("0 - Вийти")
+
+    choice = input("Введіть пункт меню: ")
+
+    if choice == "1":
+
+        output(cars)
+
+    elif choice == "2":
+
+        name = input("Введіть назву автомобіля: ")
+
+        if name in cars:
+            print("Такий автомобіль вже є.")
+        else:
+            power = int(input("Введіть потужність двигуна: "))
+            price = float(input("Введіть вартість: "))
+
+            add(cars, name, power, price)
+
+    elif choice == "3":
+
+        name = input("Введіть назву автомобіля: ")
+
+        delete(cars, name)
+
+    elif choice == "4":
+
+        sort(cars)
+
+    elif choice == "5":
+
+        calculate(cars)
+
+    elif choice == "0":
+
+        print("Програму завершено.")
+        break
+
+    else:
+
+        print("Неправильний пункт меню.")
+
